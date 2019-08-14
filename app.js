@@ -10,16 +10,20 @@
  *
  */
 const Koa = require('koa')
-const Router = require('koa-router')
+const parser = require('koa-bodyparser')
+// 初始化管理器
+const InitManager = require('./core/init')
 
 const app = new Koa()
-const router = new Router()
 
-router.get('/classic/latest', (ctx, next) => {
-    ctx.body = { key: '11' }
-})
+app.use(parser())
+InitManager.initCore(app)
 
-app.use(router.routes())
+// 手动注册路由
+// const book = require('./api/v1/book')
+// const classic = require('./api/v1/classic')
+// app.use(book.routes())
+// app.use(classic.routes())
 
 app.listen(3333)
 

@@ -1,6 +1,6 @@
 /**
  *
- * @description:
+ * @description: 封装错误提示
  * @author: junyong.hong
  * @createTime: 2019/8/15
  * @version: 1.0.0.0

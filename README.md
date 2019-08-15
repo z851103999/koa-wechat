@@ -5,7 +5,7 @@ secretKey: 'abjkhduf',
 secretKey:'qwerdf',
 secretKey: "aqingcyan",
 
-4-2 0分钟
+4-8 0分钟
 
 
 
@@ -20,7 +20,7 @@ secretKey: "aqingcyan",
     获取header:ctx.request.header
 
 ## 3 启动
-    node app.js
+    npm run dev
 
 ## 2 3种导入方式
     const Koa = require('koa')   commonJS

@@ -17,6 +17,7 @@ class InitManger {
     static initCore(app) {
         InitManger.app = app
         InitManger.initLoadRouters()
+        InitManger.loadHttpException()
     }
 
     // 加载全部路由
@@ -34,6 +35,12 @@ class InitManger {
                 InitManger.app.use(obj.routes())
             }
         }
+    }
+
+    // global全局引入错误提示
+    static loadHttpException() {
+        const errors = require('./http-exception.js')
+        global.errs = errors
     }
 }
 

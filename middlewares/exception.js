@@ -15,8 +15,6 @@ const catchError = async (ctx, next) => {
     try {
         await next()
     } catch (error) {
-        // 未知型错误
-
         // 错误的类型是HttpException，是一个已知型错误
         if (error instanceof HttpException) {
             ctx.body = {
@@ -25,6 +23,13 @@ const catchError = async (ctx, next) => {
                 request: `${ctx.method} ${ctx.path}`
             }
             ctx.status = error.code
+        } else {    // 未知型错误
+            ctx.body = {
+                msg: '未知型错误',
+                error_code: 999,
+                request: `${ctx.method} ${ctx.path}`
+            }
+            ctx.status = 500
         }
     }
 }

@@ -18,6 +18,13 @@ class InitManger {
         InitManger.app = app
         InitManger.initLoadRouters()
         InitManger.loadHttpException()
+        InitManger.loadConfig()
+    }
+
+    static loadConfig(path = '') {
+        const configPath = path || process.cwd() + '/config/config.js'
+        const config = require(configPath)
+        global.config = config
     }
 
     // 加载全部路由

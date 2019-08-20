@@ -27,12 +27,22 @@ const sequelize = new Sequelize(dbName, user, password, {
     loggind: true,
     timezone: '+08:00',
     define: {
-
+        // 不自动添加创建时间、修改时间、删除时间的字段
+        timestamps: true,
+        paranoid: true,
+        createdAt: 'created_at',
+        updatedAt: 'updated_at',
+        deleteAt: 'deleted_at',
+        underscored: true
     }
 })
 
+sequelize.sync({
+    force: true
+})
+
 module.exports = {
-    db: sequelize
+    sequelize
 }
 
 

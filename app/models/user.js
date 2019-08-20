@@ -9,7 +9,7 @@
  *    2、
  *
  */
-const { db } = require('../../core/db')
+const { sequelize } = require('../../core/db')
 
 const { Sequelize, Model } = require('sequelize')
 
@@ -22,10 +22,13 @@ User.init({
         type: Sequelize.INTEGER,
         primaryKey: true,
         // 自动增长
-        sutoIncrement: true
+        autoIncrement: true
     },
     nickname: Sequelize.STRING,
-    email: Sequelize.STRING,
+    email: {
+        type: Sequelize.STRING(128),
+        unique: true
+    },
     password: Sequelize.STRING,
     // 同一个用户，对不同的小程序，是会有不同的openid
     // 对小程序、公众号都会有个一个相同的unionID
@@ -34,4 +37,12 @@ User.init({
         type: Sequelize.STRING(64),
         unique: true
     }
+}, {
+    sequelize,
+    // 数据库名称
+    tableName: 'user'
 })
+
+module.exports = {
+    User
+}

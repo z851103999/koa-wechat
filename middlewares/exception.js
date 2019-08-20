@@ -16,7 +16,9 @@ const catchError = async (ctx, next) => {
         await next()
     } catch (error) {
         // 开发环境如果出现错误，要抛出异常，好排查
-        if (global.config.environment === 'dev') {
+        const isHttpException = error instanceof HttpException
+        const isDev = global.config.environment === 'dev'
+        if (isDev && !isHttpException) {
             // 如果这里抛出异常，不会往下走
             throw error
         }

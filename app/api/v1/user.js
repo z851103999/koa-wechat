@@ -9,7 +9,6 @@
  *    2、
  *
  */
-const bcrypt = require('bcryptjs')
 const Router = require('koa-router')
 const { success } = require('../../lib/helper')
 const { RegisterValidator } = require('../../validators/validator')

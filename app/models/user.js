@@ -9,6 +9,7 @@
  *    2、
  *
  */
+// 加盐
 const bcrypt = require('bcryptjs')
 const { sequelize } = require('../../core/db')
 

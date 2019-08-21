@@ -1,6 +1,6 @@
 /**
  *
- * @description:
+ * @description: 成功信息返回
  * @author: junyong.hong
  * @createTime: 2019/8/21
  * @version: 1.0.0.0

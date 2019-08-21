@@ -19,9 +19,9 @@ class HttpException extends Error {
     constructor(msg = '', errorCode = 10000, code = 400) {
         // 调用基类构造函数
         super()
-        this.errorCode = errorCode
         this.code = code
         this.msg = msg
+        this.errorCode = errorCode
     }
 }
 
@@ -35,6 +35,7 @@ class ParameterException extends HttpException{
     }
 }
 
+// success
 class Success extends HttpException {
     constructor(msg, errorCode) {
         super()
@@ -44,6 +45,7 @@ class Success extends HttpException {
     }
 }
 
+// 资源未找到
 class NotFound extends HttpException {
     constructor(msg, errorCode) {
         super()
@@ -53,6 +55,7 @@ class NotFound extends HttpException {
     }
 }
 
+// 授权失败
 class AuthFailed extends HttpException {
     constructor(msg, errorCode) {
         super()
@@ -62,6 +65,7 @@ class AuthFailed extends HttpException {
     }
 }
 
+// 禁止访问
 class Forbidden extends HttpException {
     constructor(msg, errorCode) {
         super()
@@ -71,6 +75,7 @@ class Forbidden extends HttpException {
     }
 }
 
+// 你已经点赞过
 class linkError extends HttpException {
     constructor(msg, errorCode) {
         super()
@@ -80,6 +85,7 @@ class linkError extends HttpException {
     }
 }
 
+// 你已取消点赞
 class DislikeError extends HttpException {
     constructor(msg, errorCode) {
         super()

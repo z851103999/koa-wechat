@@ -9,7 +9,8 @@
  *    2、
  *
  */
-const { Rule, LinValidator } = require('../../core/lin-validator')
+const { Rule, LinValidator } = require('../../core/lin-validator-v2')
+const { User } = require('../models/user.js')
 
 // 校验正整数
 class PositiveIntegerValidator extends LinValidator {
@@ -50,6 +51,18 @@ class RegisterValidator extends LinValidator{
         const psw2 = vals.body.password2
         if (psw1 !== psw2) {
             throw new Error('两次输入的密码不一致，请重新输入')
+        }
+    }
+
+    async validateEmail(vals) {
+        const email = vals.body.email
+        const user = await User.findOne({
+            where: {
+                email: email
+            }
+        })
+        if (user) {
+            throw new Error('email已存在')
         }
     }
 }

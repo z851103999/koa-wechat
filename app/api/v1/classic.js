@@ -13,11 +13,11 @@ const Router = require('koa-router')
 const router = new Router()
 const { PositiveIntegerValidator } = require('../../validators/validator.js')
 
-router.post('/v1/:id/classic/latest', (ctx, next) => {
+router.post('/v1/:id/classic/latest', async (ctx, next) => {
     const query = ctx.params
 
     // 校验器
-    const v = new PositiveIntegerValidator().validate(ctx)
+    const v = await new PositiveIntegerValidator().validate(ctx)
     // parsed = false保持原来的数据类型
     const id = v.get('query.id', parsed = false)
     ctx.body = 'success'

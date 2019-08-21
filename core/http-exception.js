@@ -89,7 +89,6 @@ class DislikeError extends HttpException {
     }
 }
 
-
 module.exports = {
     HttpException,
     ParameterException,

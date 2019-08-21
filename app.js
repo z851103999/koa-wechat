@@ -16,8 +16,6 @@ const InitManager = require('./core/init')
 // 全局异常处理
 const catchError = require('./middlewares/exception')
 
-require('./app/models/user')
-
 const app = new Koa()
 
 app.use(catchError)

@@ -9,6 +9,7 @@
  *    2、
  *
  */
+const bcrypt = require('bcryptjs')
 const { sequelize } = require('../../core/db')
 
 const { Sequelize, Model } = require('sequelize')
@@ -29,7 +30,16 @@ User.init({
         type: Sequelize.STRING(128),
         unique: true
     },
-    password: Sequelize.STRING,
+    password: {
+        type: Sequelize.STRING,
+        // 属性操作（观察者模式）
+        set (val) {
+            // 加盐 花费的成本10
+            const salt = bcrypt.genSaltSync(10)
+            const psw = bcrypt.hashSync(val, salt)
+            this.setDataValue('password', psw)
+        }
+    },
     // 同一个用户，对不同的小程序，是会有不同的openid
     // 对小程序、公众号都会有个一个相同的unionID
     openid: {

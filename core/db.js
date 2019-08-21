@@ -1,6 +1,6 @@
 /**
  *
- * @description: 用代码创建数据库的表
+ * @description: sequelize：用代码创建数据库的表
  * @author: junyong.hong
  * @createTime: 2019/8/19
  * @version: 1.0.0.0

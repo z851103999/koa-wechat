@@ -21,6 +21,7 @@ class InitManger {
         InitManger.loadConfig()
     }
 
+    // 加载配置文件
     static loadConfig(path = '') {
         const configPath = path || process.cwd() + '/config/config.js'
         const config = require(configPath)

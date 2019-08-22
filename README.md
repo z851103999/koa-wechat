@@ -5,7 +5,7 @@ secretKey: 'abjkhduf',
 secretKey:'qwerdf',
 secretKey: "aqingcyan",
 
-6-6  1分钟
+7-1  0分钟
 
 
 

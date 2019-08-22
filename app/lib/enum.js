@@ -1,6 +1,6 @@
 /**
  *
- * @description:
+ * @description: 枚举
  * @author: junyong.hong
  * @createTime: 2019/8/22
  * @version: 1.0.0.0

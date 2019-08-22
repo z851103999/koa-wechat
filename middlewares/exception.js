@@ -1,6 +1,6 @@
 /**
  *
- * @description: 全局异常处理（用到AOP 面向切面编程）
+ * @description: 全局异常处理（用到AOP 面向切面编程） 在app.js里有调用到
  * @author: junyong.hong
  * @createTime: 2019/8/15
  * @version: 1.0.0.0

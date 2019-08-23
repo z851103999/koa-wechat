@@ -20,5 +20,11 @@ module.exports = {
         port: 3306,
         user: 'root',
         password: 'root'
+    },
+    // 令牌
+    security: {
+        secretKey: 'abcdefg',
+        // 过期时间60*60=1个小时
+        expiresIn: 60*60*24*30
     }
 }

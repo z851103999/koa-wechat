@@ -66,7 +66,7 @@ class AuthFailed extends HttpException {
 }
 
 // 禁止访问
-class Forbidden extends HttpException {
+class Forbbiden extends HttpException {
     constructor(msg, errorCode) {
         super()
         this.code = 403
@@ -101,7 +101,7 @@ module.exports = {
     Success,
     NotFound,
     AuthFailed,
-    Forbidden,
+    Forbbiden,
     linkError,
     DislikeError
 }

@@ -16,6 +16,7 @@ const { User } = require('../../models/user')
 
 const { generateToken } = require('../../../core/util')
 const { Auth } = require('../../../middlewares/auth')
+const { WXManager } = require('../../services/wx')
 
 const router = new Router({
     // 指定路由前缀
@@ -29,15 +30,15 @@ router.post('/', async (ctx) => {
     let token
     // {"account":"邮箱","type":"登录类型","secret":"密码"}
     switch (v.get('body.type')) {
-        case LoginType.USER_EMAIL:          // 101:邮箱登录
+        case LoginType.USER_EMAIL:          // 101：邮箱登录
             token = await emailLogin(v.get('body.account'), v.get('body.secret'))
             break;
 
-        case LoginType.USER_MINI_PROGRAM:   // 100:用户小程序登录
-
+        case LoginType.USER_MINI_PROGRAM:   // 100：用户小程序登录
+            token = await WXManager.codeToToken(v.get('body.account'))
             break;
 
-        case LoginType.ADMIN_EMAIL:
+        case LoginType.ADMIN_EMAIL:         // 200：管理员登录
 
             break;
 

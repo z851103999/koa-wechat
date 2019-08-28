@@ -26,5 +26,10 @@ module.exports = {
         secretKey: 'abcdefg',
         // 过期时间60*60=1个小时
         expiresIn: 60*60*24*30
+    },
+    wx: {
+        appId: 'wxba39866501301226',
+        appSecret: '',
+        loginUrl: 'https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code'
     }
 }

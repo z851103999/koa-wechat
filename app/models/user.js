@@ -35,6 +35,23 @@ class User extends Model{
 
         return user
     }
+
+    // 查询当前openid是否已经存在数据库中
+    static async getUserByOpenId(openid) {
+        const user = await User.findOne({
+            where: {
+                openid
+            }
+        })
+        return user
+    }
+
+    // 创建用户
+    static async registerByOpenid(openid) {
+        return await User.create({
+            openid
+        })
+    }
 }
 
 User.init({

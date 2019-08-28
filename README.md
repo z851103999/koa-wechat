@@ -1,13 +1,6 @@
 # api-koa-island
 
-secretKey: 'yangpengcheng19950215',
-secretKey: 'abjkhduf',
-secretKey:'qwerdf',
-secretKey: "aqingcyan",
-
-7-3  2分钟
-
-
+8-1 0分钟
 
 #### 介绍
     纯正商业级应用－Node.js Koa2开发微信小程序服务端

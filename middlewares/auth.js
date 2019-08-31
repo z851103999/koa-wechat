@@ -32,7 +32,7 @@ class Auth {
             }
 
             try {
-                // 校验
+                // 校验token是否正确
                 var decode = jwt.verify(userToken.name, global.config.security.secretKey)
             } catch (error) {
                 // 不合法的
@@ -58,6 +58,16 @@ class Auth {
             }
 
             await next()
+        }
+    }
+
+    // 校验token是否正确
+    static verifyToken(token) {
+        try {
+            jwt.verify(token, global.config.security.secretKey)
+            return true
+        } catch(error) {
+            return false
         }
     }
 }

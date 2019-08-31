@@ -15,11 +15,22 @@ const router = new Router({
     prefix: '/v1/classic'
 })
 
+const { Flow } = require('../../models/flow')
 const { PositiveIntegerValidator } = require('../../validators/validator.js')
 const { Auth } = require('../../../middlewares/auth')
 
+// 查询最新一期的期刊
 router.get('/latest', new Auth().m, async (ctx, next) => {
-    ctx.body = ctx.auth.uid
+    const flow = Flow.findOne({
+        order: [
+            ['index', 'DESC']
+        ]
+    })
+    ctx.body = flow
+
+
+
+    // ctx.body = ctx.auth.uid
     // const query = ctx.params
 
     // 校验器

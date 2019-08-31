@@ -27,7 +27,7 @@ const router = new Router({
 router.post('/', async (ctx) => {
     const v = await new TokenValidator().validate(ctx)
 
-    let token
+    let token;
     // {"account":"邮箱","type":"登录类型","secret":"密码"}
     switch (v.get('body.type')) {
         case LoginType.USER_EMAIL:          // 101：邮箱登录
@@ -35,7 +35,9 @@ router.post('/', async (ctx) => {
             break;
 
         case LoginType.USER_MINI_PROGRAM:   // 100：用户小程序登录
+            console.log('token1', v.get('body.account'))
             token = await WXManager.codeToToken(v.get('body.account'))
+            console.log('token2', token)
             break;
 
         case LoginType.ADMIN_EMAIL:         // 200：管理员登录

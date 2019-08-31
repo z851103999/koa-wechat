@@ -37,7 +37,7 @@ class User extends Model{
     }
 
     // 查询当前openid是否已经存在数据库中
-    static async getUserByOpenId(openid) {
+    static async getUserByOpenid(openid) {
         const user = await User.findOne({
             where: {
                 openid

@@ -76,7 +76,7 @@ class Forbbiden extends HttpException {
 }
 
 // 你已经点赞过
-class linkError extends HttpException {
+class LikeError extends HttpException {
     constructor(msg, errorCode) {
         super()
         this.code = 400
@@ -102,6 +102,6 @@ module.exports = {
     NotFound,
     AuthFailed,
     Forbbiden,
-    linkError,
+    LikeError,
     DislikeError
 }

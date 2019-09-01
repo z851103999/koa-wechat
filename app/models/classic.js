@@ -16,7 +16,7 @@ const classicFields = {
     image: Sequelize.STRING,
     content: Sequelize.STRING,
     pubdate: Sequelize.DATEONLY,
-    fav_nums: Sequelize.INTERGER,
+    fav_nums: Sequelize.INTEGER,
     title: Sequelize.STRING,
     type: Sequelize.TINYINT
 }
@@ -45,9 +45,7 @@ Sentence.init(classicFields, {
 class Music extends Model {
 
 }
-const musicFields = Object.assign({
-    url: Sequelize.STRING
-}, classicFields)
+const musicFields = Object.assign({url: Sequelize.STRING}, classicFields)
 Music.init(musicFields, {
     sequelize,
     tableName: 'music'

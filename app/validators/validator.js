@@ -116,7 +116,6 @@ function checkType(vals) {
     if (!LoginType.isThisType(vals.body.type)) {
         throw new Error('type参数不合法')
     }
-
 }
 
 // 点赞校验

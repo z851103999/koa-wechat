@@ -86,7 +86,7 @@ class LikeError extends HttpException {
 }
 
 // 你已取消点赞
-class DislikeError extends HttpException {
+class DisLikeError extends HttpException {
     constructor(msg, errorCode) {
         super()
         this.code = 400
@@ -103,5 +103,5 @@ module.exports = {
     AuthFailed,
     Forbbiden,
     LikeError,
-    DislikeError
+    DisLikeError
 }

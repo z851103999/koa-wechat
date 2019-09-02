@@ -1,6 +1,6 @@
 /**
  *
- * @description:
+ * @description: 配置信息
  * @author: junyong.hong
  * @createTime: 2019/8/19
  * @version: 1.0.0.0
@@ -9,8 +9,6 @@
  *    2、
  *
  */
-
-
 module.exports = {
     // prod
     environment: 'dev',

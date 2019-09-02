@@ -58,6 +58,7 @@ router.post('/', async (ctx) => {
  */
 router.post('/verify', async (ctx) => {
     const v = await new NotEmptyValidator().validate(ctx)
+    // 校验token是否正确
     const result = Auth.verifyToken(v.get('body.token'))
     ctx.body = {
         is_valide: result

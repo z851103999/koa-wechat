@@ -16,7 +16,6 @@ const router = new Router({
 })
 
 const { Flow } = require('../../models/flow')
-// const { PositiveIntegerValidator } = require('../../validators/validator.js')
 const { Auth } = require('../../../middlewares/auth')
 const { Art } = require('../../models/art')
 const { Favor } = require('../../models/favor')
@@ -30,6 +29,7 @@ router.get('/latest', new Auth().m, async (ctx, next) => {
         ]
     })
 
+    // 根据type（类别）查询对应的数据
     let art = await Art.getData(flow.art_id, flow.type)
     // 当前用户是否喜欢该期刊
     const likePrevious = await Favor.userLikeIt(flow.art_id, flow.type, ctx.auth.uid)
@@ -42,23 +42,6 @@ router.get('/latest', new Auth().m, async (ctx, next) => {
     ctx.body = {
         art
     }
-
-
-
-    // ctx.body = ctx.auth.uid
-    // const query = ctx.params
-
-    // 校验器
-    // const v = await new PositiveIntegerValidator().validate(ctx)
-    // parsed = false保持原来的数据类型
-    // const id = v.get('query.id', parsed = false)
-    // ctx.body = 'success'
-
-    // 全局异常错误处理
-    // if (true) {
-    //     const error = new global.errs.ParameterException()
-    //     throw error
-    // }
 })
 
 // 获取下一期期刊
@@ -72,16 +55,18 @@ router.get('/:index/next', new Auth().m, async (ctx, next) => {
         where: {
             index: index + 1
         }
-    });
+    })
     if (!flow) {
-        throw  new global.errs.NotFound();
+        throw new global.errs.NotFound()
     }
 
-    let art = await Art.getData(flow.art_id, flow.type);
-    const likeNext = await Favor.userLikeIt(flow.art_id, flow.type, ctx.auth.uid);
+    // 根据type（类别）查询对应的数据
+    let art = await Art.getData(flow.art_id, flow.type)
+    // 当前用户是否喜欢该期刊
+    const likeNext = await Favor.userLikeIt(flow.art_id, flow.type, ctx.auth.uid)
 
-    art.setDataValue('index', flow.index);
-    art.setDataValue('like_status', likeNext);
+    art.setDataValue('index', flow.index)
+    art.setDataValue('like_status', likeNext)
 
     ctx.body = {
         art
@@ -94,21 +79,23 @@ router.get('/:index/previous', new Auth().m, async (ctx, next) => {
         id: 'index'
     })
 
-    const index = v.get('path.index');
+    const index = v.get('path.index')
     const flow = await Flow.findOne({
         where: {
             index: index - 1
         }
-    });
+    })
     if (!flow) {
-        throw  new global.errs.NotFound();
+        throw new global.errs.NotFound()
     }
 
-    let art = await Art.getData(flow.art_id, flow.type);
-    const likePrevious = await Favor.userLikeIt(flow.art_id, flow.type, ctx.auth.uid);
+    // 根据type（类别）查询对应的数据
+    let art = await Art.getData(flow.art_id, flow.type)
+    // 当前用户是否喜欢该期刊
+    const likePrevious = await Favor.userLikeIt(flow.art_id, flow.type, ctx.auth.uid)
 
-    art.setDataValue('index', flow.index);
-    art.setDataValue('like_status', likePrevious);
+    art.setDataValue('index', flow.index)
+    art.setDataValue('like_status', likePrevious)
 
     ctx.body = {
         art

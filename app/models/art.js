@@ -1,6 +1,6 @@
 /**
  *
- * @description:
+ * @description: 转发查询
  * @author: junyong.hong
  * @createTime: 2019/9/1
  * @version: 1.0.0.0
@@ -16,8 +16,15 @@ const {
 } = require('../models/classic')
 
 class Art {
+    /**
+     * 根据type（类别）查询对应的数据
+     * @param art_id 文章
+     * @param type 100电影 200音乐 300句子 400书籍
+     * @param useScope
+     * @returns {Promise.<*>}
+     */
     static async getData(art_id, type, useScope = true) {
-
+        // 查询条件
         let art = null
         const finder = {
             where: {
@@ -29,7 +36,7 @@ class Art {
 
         switch (type) {
             case 100:   // 电影
-                // .scope(scope) 查询出来，不包含这3个字段
+                // .scope('bh') 查询出来，不包含这3个字段（'updated_at', 'deleted_at', 'created_at'）
                 art = await Movie.scope(scope).findOne(finder)
                 break
 

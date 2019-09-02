@@ -19,33 +19,26 @@ const { Auth } = require('../../middlewares/auth')
 class WXManager {
     // 用户小程序登录
     static async codeToToken (code) {
-        console.log('code', code)
-
         // openid唯一标识
         const url = util.format(global.config.wx.loginUrl,
             global.config.wx.appId,
             global.config.wx.appSecret,
             code)
 
-        console.log('url', url)
-
         const result = await axios.get(url)
-        console.log('result', result)
-
         if (result.status !== 200) {
             throw new global.errs.AuthFailed('openid获取失败')
         }
         const errcode = result.data.errcode
         const errmsg = result.data.errmsg
-        console.log('errcode', errcode)
-        console.log('errmsg', errmsg)
         if (errcode) {
             throw new global.errs.AuthFailed('openid获取失败:' + errcode + ',' + errmsg)
         }
 
-
+        // 查询当前openid是否已经存在数据库中
         let user = await User.getUserByOpenid(result.data.openid)
-        if (!user) {
+        if (!user) {    // 不存在
+            // 创建用户
             user = await User.registerByOpenid(result.data.openid)
         }
         return generateToken(user.id, Auth.USER)

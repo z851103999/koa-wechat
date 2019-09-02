@@ -1,6 +1,6 @@
 /**
  *
- * @description: 点赞
+ * @description: 点赞实体
  * @author: junyong.hong
  * @createTime: 2019/9/1
  * @version: 1.0.0.0
@@ -48,7 +48,13 @@ class Favor extends Model {
         })
     }
 
-    // 取消点赞
+    /**
+     * 取消点赞
+     * @param art_id 文章
+     * @param type 类型
+     * @param uid 用户id
+     * @returns {Promise.<*>}
+     */
     static async disLlike (art_id, type, uid) {
         const favor = await Favor.findOne({
             where: {
@@ -76,7 +82,13 @@ class Favor extends Model {
         })
     }
 
-    // 当前用户是否喜欢该期刊
+    /**
+     * 当前用户是否喜欢该期刊
+     * @param art_id 文章
+     * @param type 类型
+     * @param uid 用户id
+     * @returns {Promise.<*>}
+     */
     static async userLikeIt(art_id, type, uid) {
         const favor = await Favor.findOne({
             where: {

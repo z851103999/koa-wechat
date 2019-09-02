@@ -1,6 +1,6 @@
 /**
  *
- * @description:
+ * @description: 电影、句子、音乐实体
  * @author: junyong.hong
  * @createTime: 2019/8/31
  * @version: 1.0.0.0
@@ -45,7 +45,7 @@ Sentence.init(classicFields, {
 class Music extends Model {
 
 }
-const musicFields = Object.assign({url: Sequelize.STRING}, classicFields)
+const musicFields = Object.assign({url: Sequelize.STRING}, classicFields)   // 比其他多了个url字段
 Music.init(musicFields, {
     sequelize,
     tableName: 'music'

@@ -16,7 +16,7 @@ const {
 } = require('../models/classic')
 
 class Art {
-    static async getData(art_id, type) {
+    static async getData(art_id, type, useScope = true) {
 
         let art = null
         const finder = {
@@ -25,17 +25,20 @@ class Art {
             }
         }
 
+        const scope = useScope ? 'bh' : null
+
         switch (type) {
             case 100:   // 电影
-                art = await Movie.findOne(finder)
+                // .scope(scope) 查询出来，不包含这3个字段
+                art = await Movie.scope(scope).findOne(finder)
                 break
 
             case 200:   // 音乐
-                art = await Music.findOne(finder)
+                art = await Music.scope(scope).findOne(finder)
                 break
 
             case 300:   // 句子
-                art = await Sentence.findOne(finder)
+                art = await Sentence.scope(scope).findOne(finder)
                 break
 
             case 400:   // 书籍

@@ -42,7 +42,7 @@ class Favor extends Model {
                 uid
             }, { transaction: t })
 
-            const art = await Art.getData(art_id, type)
+            const art = await Art.getData(art_id, type, false)
             // 变量加1操作
             await art.increment('fav_nums', { by: 1, transaction: t })
         })
@@ -70,10 +70,22 @@ class Favor extends Model {
                 transaction: t
             })
 
-            const art = await Art.getData(art_id, type)
+            const art = await Art.getData(art_id, type, false)
             // 变量减1操作
             await art.decrement('fav_nums', { by: 1, transaction: t })
         })
+    }
+
+    // 当前用户是否喜欢该期刊
+    static async userLikeIt(art_id, type, uid) {
+        const favor = await Favor.findOne({
+            where: {
+                art_id,
+                type,
+                uid
+            }
+        })
+        return !!favor;
     }
 }
 

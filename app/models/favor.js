@@ -10,7 +10,7 @@
  *
  */
 const { sequelize } = require('../../core/db')
-const { Sequelize, Model } = require('sequelize')
+const { Sequelize, Model, Op } = require('sequelize')
 const { Art } = require('./art')
 
 class Favor extends Model {
@@ -98,6 +98,28 @@ class Favor extends Model {
             }
         })
         return !!favor;
+    }
+
+    /**
+     * 获取用户所有对期刊（不包含书籍）的点赞
+     * @param uid
+     * @returns {Promise.<void>}
+     */
+    static async getMyClassicFavor(uid) {
+        const arts = await Favor.findAll({
+            where: {
+                uid,
+                type: {
+                    [Op.not]: 400   // type!=400 排除书籍
+                }
+            }
+        })
+        if (!arts) {
+            throw new global.errs.NotFound()
+        }
+        console.log('art',arts)
+
+        return await Art.getList(arts)
     }
 }
 

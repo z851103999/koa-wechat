@@ -102,24 +102,37 @@ router.get('/:index/previous', new Auth().m, async (ctx, next) => {
     }
 })
 
+// 获取某个期刊的详细信息
+router.get('/:type/:id', new Auth().m, async ctx => {
+    const v = await new ClassicValidator().validate(ctx)
+    const id = v.get('path.id')
+    const type = parseInt(v.get('path.type'))
+
+    const artDetail = await new Art(id, type).getDetail(ctx.auth.uid)
+
+    artDetail.art.setDataValue('like_status', artDetail.like_status)
+    ctx.body = artDetail.art
+})
+
 // 获取期刊点赞情况
 router.get('/:type/:id/favor', new Auth().m, async ctx => {
     const v = await new ClassicValidator().validate(ctx)
     const id = v.get('path.id')
     const type = parseInt(v.get('path.type'))
-    // 根据type（类别）查询对应的数据
-    let art = await Art.getData(id, type)
-    if (!art) {
-        throw new global.errs.NotFound()
-    }
 
-    // 当前用户是否喜欢该期刊
-    const like = await Favor.userLikeIt(id, type, ctx.auth.uid)
+    const artDetail = await new Art(id, type).getDetail(ctx.auth.uid)
 
     ctx.body = {
-        fav_nums: art.fav_nums,
-        like_status: like
+        fav_nums: artDetail.art.fav_nums,
+        like_status: artDetail.like_status
     }
+})
+
+// 获取用户所有对期刊的点赞
+router.get('/favor', new Auth().m, async ctx => {
+    console.log('111111')
+    const uid = ctx.auth.uid
+    ctx.body = await Favor.getMyClassicFavor(uid)
 })
 
 module.exports = router

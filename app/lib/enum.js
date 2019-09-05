@@ -32,9 +32,13 @@ const LoginType = {
 }
 
 const ArtType = {
+    // 电影
     MOVIE: 100,
+    // 音乐
     MUSIC: 200,
+    // 句子
     SENTENCE: 300,
+    // 书籍
     BOOK: 400,
     isThisType
 }

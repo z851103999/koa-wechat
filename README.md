@@ -1,9 +1,9 @@
 # api-koa-island
 
-11-1 0分钟
+11-6 分钟
 
 #### 介绍
-    纯正商业级应用－Node.js Koa2开发微信小程序服务端
+    纯正商业级应用－Node.js Koa2开发微 信小程序服务端
     
     访问路径：http://localhost:3333/v1/3/classic/latest
 

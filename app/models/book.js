@@ -13,7 +13,7 @@ const { sequelize } = require('../../core/db')
 const axios = require('axios')
 const util = require('util')
 const { Sequelize, Model } = require('sequelize')
-const { Favor } = require('./favor')
+const { Favor } = require('@models/favor')
 
 class Book extends Model{
     constructor(id){

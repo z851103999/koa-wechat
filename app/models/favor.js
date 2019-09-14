@@ -11,7 +11,7 @@
  */
 const { sequelize } = require('../../core/db')
 const { Sequelize, Model, Op } = require('sequelize')
-const { Art } = require('./art')
+const { Art } = require('@models/art')
 
 class Favor extends Model {
     /**
@@ -117,9 +117,31 @@ class Favor extends Model {
         if (!arts) {
             throw new global.errs.NotFound()
         }
-        console.log('art',arts)
 
         return await Art.getList(arts)
+    }
+
+    // 获取每本书籍点赞的情况
+    static async getBookFavor(uid, bookId) {
+        const favorNums = await Favor.count({
+            where: {
+                art_id: bookId,
+                type: 400
+            }
+        })
+
+        const myFavor = await Favor.findOne({
+            where: {
+                art_id: bookId,
+                uid,
+                type: 400
+            }
+        })
+
+        return {
+            fav_nums: favorNums,
+            like_status: myFavor ? 1 : 0
+        }
     }
 }
 

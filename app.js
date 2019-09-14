@@ -9,6 +9,8 @@
  *    2、
  *
  */
+require('module-alias/register')
+
 const Koa = require('koa')
 const parser = require('koa-bodyparser')
 // 初始化管理器

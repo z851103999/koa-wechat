@@ -10,10 +10,12 @@
  *
  */
 const Router = require('koa-router')
-const { HotBook } = require('../../models/hot-book')
-const { Book } = require('../../models/book')
-const { PositiveIntegerValidator, SearchValidator } = require('../../validators/validator')
+const { HotBook } = require('@models/hot-book')
+const { Book } = require('@models/book')
+const { Favor } = require('@models/favor')
+const { PositiveIntegerValidator, SearchValidator } = require('@validator')
 const { Auth } = require('../../../middlewares/auth')
+
 
 const router = new Router({
     prefix: '/v1/book'
@@ -48,6 +50,21 @@ router.get('/favor/count', new Auth().m, async ctx => {
     ctx.body = {
         count
     }
+})
+
+// 获取每本书籍点赞的情况
+router.get('/:book_id/favor', new Auth().m, async ctx => {
+    const v = await new PositiveIntegerValidator().validate(ctx, {
+        // book_id的别名为id
+        id: 'book_id'
+    })
+    const favor = await Favor.getBookFavor(ctx.auth.uid, v.get('path.book_id'))
+    ctx.body = favor
+})
+
+// 新增短评
+router.get('/add/short_comment', new Auth().m, async ctx => {
+
 })
 
 module.exports = router

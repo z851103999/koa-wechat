@@ -11,8 +11,8 @@
  */
 const Router = require('koa-router')
 const { success } = require('../../lib/helper')
-const { RegisterValidator } = require('../../validators/validator')
-const { User } = require('../../models/user')
+const { RegisterValidator } = require('@validator')
+const { User } = require('@models/user')
 
 const router = new Router({
     // 指定路由前缀

@@ -15,11 +15,11 @@ const router = new Router({
     prefix: '/v1/classic'
 })
 
-const { Flow } = require('../../models/flow')
+const { Flow } = require('@models/flow')
+const { Art } = require('@models/art')
+const { Favor } = require('@models/favor')
 const { Auth } = require('../../../middlewares/auth')
-const { Art } = require('../../models/art')
-const { Favor } = require('../../models/favor')
-const {PositiveIntegerValidator, ClassicValidator} = require('../../validators/validator')
+const {PositiveIntegerValidator, ClassicValidator} = require('@validator')
 
 // 查询最新一期的期刊
 router.get('/latest', new Auth().m, async (ctx, next) => {

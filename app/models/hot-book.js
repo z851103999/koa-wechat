@@ -11,7 +11,7 @@
  */
 const { sequelize } = require('../../core/db')
 const { Sequelize, Model, Op } = require('sequelize')
-const { Favor } = require('./favor')
+const { Favor } = require('@models/favor')
 
 class HotBook extends Model{
     // 获取热门书籍列表

@@ -14,8 +14,8 @@ const router = new Router({
     // 指定路由前缀
     prefix: '/v1/like'
 })
-const { LikeValidator } = require('../../validators/validator')
-const { Favor } = require('../../models/favor')
+const { Favor } = require('@models/favor')
+const { LikeValidator } = require('@validator')
 const { success } = require('../../lib/helper')
 const { Auth } = require('../../../middlewares/auth')
 

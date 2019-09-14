@@ -12,7 +12,7 @@
 const Router = require('koa-router')
 const { TokenValidator, NotEmptyValidator } = require('../../validators/validator')
 const { LoginType } = require('../../lib/enum')
-const { User } = require('../../models/user')
+const { User } = require('@models/user')
 
 const { generateToken } = require('../../../core/util')
 const { Auth } = require('../../../middlewares/auth')

@@ -147,6 +147,21 @@ class Checker{
     }
 }
 
+// 点赞校验
+class LikeValidator extends PositiveIntegerValidator {
+    constructor(){
+        super()
+        // const checker = new Checker(ArtType)
+        // this.validateType = checker.check.bind(checker)
+
+        this.validateType = checkArtType
+    }
+}
+
+class ClassicValidator extends LikeValidator {
+
+}
+
 // 图书搜索
 class SearchValidator extends LinValidator{
     constructor(){
@@ -177,19 +192,17 @@ class SearchValidator extends LinValidator{
     }
 }
 
-// 点赞校验
-class LikeValidator extends PositiveIntegerValidator {
-    constructor(){
+// 新增短评
+class AddShortCommentValidator extends PositiveIntegerValidator{
+    constructor() {
         super()
-        // const checker = new Checker(ArtType)
-        // this.validateType = checker.check.bind(checker)
-
-        this.validateType = checkArtType
+        this.content = [
+            new Rule('isLength', '必须再1到12个字符之间', {
+                min: 1,
+                max: 12
+            })
+        ]
     }
-}
-
-class ClassicValidator extends LikeValidator {
-
 }
 
 module.exports = {
@@ -199,5 +212,6 @@ module.exports = {
     NotEmptyValidator,
     LikeValidator,
     ClassicValidator,
-    SearchValidator
+    SearchValidator,
+    AddShortCommentValidator
 }

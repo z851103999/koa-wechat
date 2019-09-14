@@ -147,6 +147,36 @@ class Checker{
     }
 }
 
+// 图书搜索
+class SearchValidator extends LinValidator{
+    constructor(){
+        super()
+        this.q = [
+            new Rule('isLength', '搜索关键词不能为空', {
+                min: 1,
+                max: 16
+            })
+        ]
+        this.start = [
+            new Rule('isInt', '不符合规范', {
+                min: 0,
+                max: 60000
+            }),
+            // 设置默认值
+            // ''不需要设置错误消息
+            // 0默认值
+            new Rule('isOptional', '', 0)
+        ]
+        this.count = [
+            new Rule('isInt', '不符合规范', {
+                min: 1,
+                max: 20,
+            }),
+            new Rule('isOptional', '', 20)
+        ]
+    }
+}
+
 // 点赞校验
 class LikeValidator extends PositiveIntegerValidator {
     constructor(){
@@ -168,5 +198,6 @@ module.exports = {
     TokenValidator,
     NotEmptyValidator,
     LikeValidator,
-    ClassicValidator
+    ClassicValidator,
+    SearchValidator
 }

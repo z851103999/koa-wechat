@@ -90,15 +90,15 @@ class Art {
         switch (type) {
             case 100:   // 电影
                 // .scope('bh') 查询出来，不包含这3个字段（'updated_at', 'deleted_at', 'created_at'）
-                arts = await Movie.scope(scope).findOne(finder)
+                arts = await Movie.scope(scope).findAll(finder)
                 break
 
             case 200:   // 音乐
-                arts = await Music.scope(scope).findOne(finder)
+                arts = await Music.scope(scope).findAll(finder)
                 break
 
             case 300:   // 句子
-                arts = await Sentence.scope(scope).findOne(finder)
+                arts = await Sentence.scope(scope).findAll(finder)
                 break
 
             case 400:   // 书籍

@@ -13,6 +13,7 @@ const { sequelize } = require('../../core/db')
 const axios = require('axios')
 const util = require('util')
 const { Sequelize, Model } = require('sequelize')
+const { Favor } = require('./favor')
 
 class Book extends Model{
     constructor(id){
@@ -20,11 +21,30 @@ class Book extends Model{
         this.id = id
     }
 
+    // 获取图书详情
     async detail() {
         const url = util.format(global.config.yushu.detailUrl, this.id)
         const detail = await axios.get(url)
-
         return detail.data
+    }
+
+    // 图书搜索
+    static async searchFromYuShu(q, start, count, summary = 1) {
+        // encodeURI把有中文的转义掉
+        const url = util.format(global.config.yushu.keywordUrl, encodeURI(q), count, start, summary)
+        const detail = await axios.get(url)
+        return detail.data
+    }
+
+    // 获取我喜欢的书籍数量
+    static async getMyFavorBookCount(uid) {
+        const count = await Favor.count({
+            where: {
+                type: 400,
+                uid
+            }
+        })
+        return count
     }
 }
 

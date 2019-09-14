@@ -39,9 +39,7 @@ router.get('/latest', new Auth().m, async (ctx, next) => {
     // 推荐
     art.setDataValue('index', flow.index)
     art.setDataValue('like_status', likePrevious)
-    ctx.body = {
-        art
-    }
+    ctx.body = art
 })
 
 // 获取下一期期刊
@@ -72,9 +70,7 @@ router.get('/:index/next', new Auth().m, async (ctx, next) => {
     // art.exclude = ['index', 'like_status']
 
 
-    ctx.body = {
-        art
-    }
+    ctx.body = art
 })
 
 // 获取上一期期刊
@@ -101,9 +97,7 @@ router.get('/:index/previous', new Auth().m, async (ctx, next) => {
     art.setDataValue('index', flow.index)
     art.setDataValue('like_status', likePrevious)
 
-    ctx.body = {
-        art
-    }
+    ctx.body = art
 })
 
 // 获取某个期刊的详细信息
@@ -134,7 +128,6 @@ router.get('/:type/:id/favor', new Auth().m, async ctx => {
 
 // 获取用户所有对期刊的点赞
 router.get('/favor', new Auth().m, async ctx => {
-    console.log('111111')
     const uid = ctx.auth.uid
     ctx.body = await Favor.getMyClassicFavor(uid)
 })

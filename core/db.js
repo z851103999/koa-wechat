@@ -9,7 +9,8 @@
  *    2、
  *
  */
-const Sequelize = require('sequelize')
+const { Sequelize, Model } = require('sequelize')
+const { unset, clone, isArray } = require('lodash')
 const {
     dbName,
     host,
@@ -56,6 +57,24 @@ const sequelize = new Sequelize(dbName, user, password, {
 sequelize.sync({
     force: false
 })
+
+// 在原型链上修改（进行返回的字段控制）
+Model.prototype.toJSON = function () {
+    // clone浅拷贝
+    let data = clone(this.dataValues)
+    unset(data, 'updated_at')
+    unset(data, 'created_at')
+    unset(data, 'deleted_at')
+
+    // 判断是否是数组
+    if (isArray(this.exclude)) {
+        this.exclude.forEach((value) => {
+            unset(data, value)
+        })
+    }
+
+    return data
+}
 
 module.exports = {
     sequelize

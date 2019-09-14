@@ -47,7 +47,18 @@ class Comment extends Model {
 
         return comments
     }
+
+    // // 只会返回content、nums这两个字段（控制模型类返回的相关字段）
+    // toJSON() {
+    //     return {
+    //         content: this.getDataValue('content'),
+    //         nums: this.getDataValue('nums')
+    //     }
+    // }
 }
+
+// 排除字段（不推荐，写死了）
+// Comment.prototype.exclude = ['book_id', 'id']
 
 Comment.init({
     content: Sequelize.STRING(12),

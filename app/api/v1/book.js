@@ -83,5 +83,14 @@ router.get('/:book_id/short_comment', new Auth().m, async ctx => {
     ctx.body = comments
 })
 
+// 热搜
+router.get('/hot_keyword', async ctx => {
+    ctx.body = {
+        'hot': [
+            'js',
+            'python'
+        ]
+    }
+})
 
 module.exports = router

@@ -16,6 +16,7 @@ const { Sequelize, Model } = require('sequelize')
 const { Favor } = require('@models/favor')
 
 class Book extends Model{
+    // 不推荐用构造函数
     constructor(id){
         super()
         this.id = id

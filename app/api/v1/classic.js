@@ -68,6 +68,10 @@ router.get('/:index/next', new Auth().m, async (ctx, next) => {
     art.setDataValue('index', flow.index)
     art.setDataValue('like_status', likeNext)
 
+    // 排除字段
+    // art.exclude = ['index', 'like_status']
+
+
     ctx.body = {
         art
     }

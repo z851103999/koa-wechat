@@ -19,15 +19,17 @@ const { LikeValidator } = require('@validator')
 const { success } = require('../../lib/helper')
 const { Auth } = require('../../../middlewares/auth')
 
+// 点赞
 router.post('/', new Auth().m, async ctx => {
     const v = await new LikeValidator().validate(ctx, {
         id: 'art_id'
     })
 
-    Favor.like(v.get('body.art_id'), v.get('body.type'), ctx.auth.uid)
+    await Favor.like(v.get('body.art_id'), v.get('body.type'), ctx.auth.uid)
     success()
 })
 
+// 取消点赞
 router.post('/cancel', new Auth().m, async ctx => {
     const v = await new LikeValidator().validate(ctx, {
         id: 'art_id'

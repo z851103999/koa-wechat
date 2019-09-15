@@ -44,7 +44,10 @@ class Favor extends Model {
 
             const art = await Art.getData(art_id, type, false)
             // 变量加1操作
-            await art.increment('fav_nums', { by: 1, transaction: t })
+            await art.increment('fav_nums', {
+                by: 1,
+                transaction: t
+            })
         })
     }
 

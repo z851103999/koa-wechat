@@ -16,15 +16,15 @@ const { Sequelize, Model } = require('sequelize')
 const { Favor } = require('@models/favor')
 
 class Book extends Model{
-    // 不推荐用构造函数
-    constructor(id){
-        super()
-        this.id = id
-    }
+    // // 不推荐用构造函数
+    // constructor(id){
+    //     super()
+    //     this.id = id
+    // }
 
-    // 获取图书详情
-    async detail() {
-        const url = util.format(global.config.yushu.detailUrl, this.id)
+    // 获取图书详情（实例方法）
+    async detail(id) {
+        const url = util.format(global.config.yushu.detailUrl, id)
         const detail = await axios.get(url)
         return detail.data
     }

@@ -101,7 +101,7 @@ class Art {
                 arts = await Sentence.scope(scope).findAll(finder)
                 break
 
-            case 400:   // 书籍
+            case 400:   // 书籍（不需要处理）
                 break
 
             default:
@@ -145,6 +145,13 @@ class Art {
                 break
 
             case 400:   // 书籍
+                const { Book } = require('./book')
+                art = await Book.scope(scope).findOne(finder)
+                if (!art) {
+                    art = await Book.create({
+                        id: art_id
+                    })
+                }
                 break
 
             default:

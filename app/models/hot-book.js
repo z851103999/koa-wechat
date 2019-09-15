@@ -22,7 +22,6 @@ class HotBook extends Model{
                 'index' // ,'DESC'
             ]
         })
-        console.log('books', books)
         const ids = []
         books.forEach((book) => {
             ids.push(book.id)
@@ -31,9 +30,9 @@ class HotBook extends Model{
         const favors = await Favor.findAll({
             where: {
                 art_id: {
-                    [Op.in]: ids,
-                    type: 400
-                }
+                    [Op.in]: ids
+                },
+                type: 400
             },
             group: ['art_id'],
             // attributes查询出来包含哪些字段

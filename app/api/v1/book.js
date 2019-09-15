@@ -26,16 +26,18 @@ const router = new Router({
 router.get('/hot_list', async (ctx, next) => {
     const books = await HotBook.getAll()
 
-    ctx.body = {
-        books
-    }
+    ctx.body = books
 })
 
 // 获取图书详情
 router.get('/:id/detail', async ctx => {
     const v = await new PositiveIntegerValidator().validate(ctx)
-    const book = new Book(v.get('path.id'))
-    ctx.body = await book.detail()
+
+    // 通过构造函数传递参数（不推荐）
+    // const book = new Book(v.get('path.id'))
+
+    const book = new Book()
+    ctx.body = await book.detail(v.get('path.id'))
 })
 
 // 图书搜索
@@ -79,8 +81,12 @@ router.get('/:book_id/short_comment', new Auth().m, async ctx => {
         id: 'book_id'
     })
 
-    const comments = await Comment.getComments(v.get('path.book_id'))
-    ctx.body = comments
+    const book_id = v.get('path.book_id')
+    const comments = await Comment.getComments(book_id)
+    ctx.body = {
+        comments,
+        book_id
+    }
 })
 
 // 热搜

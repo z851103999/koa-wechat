@@ -66,6 +66,15 @@ Model.prototype.toJSON = function () {
     unset(data, 'created_at')
     unset(data, 'deleted_at')
 
+    // 图片添加前缀
+    for (key in data) {
+        if (key === 'image') {
+            if (!data[key].startsWith('http')) {
+                data[key] = global.config.host + data[key]
+            }
+        }
+    }
+
     // 判断是否是数组
     if (isArray(this.exclude)) {
         this.exclude.forEach((value) => {
